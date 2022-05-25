@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql
+    container_name: springboot_mysql_filmDirectorContainer
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - springboot_essentials_data:/var/lib/mysql
+
+volumes:
+  springboot_essentials_data:
