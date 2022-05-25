@@ -1,4 +1,4 @@
-package com.example.tvseries;
+package com.filmDirector;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
