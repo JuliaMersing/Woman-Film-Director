@@ -6,5 +6,5 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
-public class ResorceNotFoundDetails extends ExceptionDetails {
+public class ResourceNotFoundDetails extends ExceptionDetails {
 }

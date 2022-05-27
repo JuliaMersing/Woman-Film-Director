@@ -40,7 +40,7 @@ public class FilmDirectorController {
         return ResponseEntity.ok(filmDirectorService.save(filmDirector));
     }
 
-    @DeleteMapping
+    @DeleteMapping(path= "{id}")
     public ResponseEntity<FilmDirector> delete(@PathVariable int id){
         filmDirectorService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

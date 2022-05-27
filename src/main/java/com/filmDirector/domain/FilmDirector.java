@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 
@@ -25,4 +22,7 @@ public class FilmDirector {
     @NotNull
     @NotEmpty(message="Name cannot be empty")
     private String name;
+    @Lob
+    @Column(name="CONTENT", length=512)
+    private String description;
 }
