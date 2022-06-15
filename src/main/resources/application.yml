@@ -4,14 +4,11 @@ server:
 
 spring:
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/filmDirector
     username: root
     password: root
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
 

@@ -23,6 +23,6 @@ public class FilmDirector {
     @NotEmpty(message="Name cannot be empty")
     private String name;
     @Lob
-    @Column(name="CONTENT", length=512)
-    private String description;
+    @Column(name="BIOGRAPHY", length=512)
+    private String biography;
 }

@@ -35,27 +35,27 @@ public class SpringClient {
 
         log.info("FilmDirector list {}", exchangeFilmDirectorList.getBody());
 
-        FilmDirector newFilmDirectorToPost = FilmDirector.builder().name("Major Motoko Kusanagi").build();
+        FilmDirector newFilmDirectorToPost = FilmDirector.builder().name("Agnès Varda").build();
 
         FilmDirector newFilmDirectorSaved = new RestTemplate()
                 .exchange("http://localhost:8080/filmDirector", HttpMethod.POST, new HttpEntity<>(newFilmDirectorToPost, createJsonHeader()), FilmDirector.class)
                 .getBody();
 
-        log.info("Major Motoko Kusanagi saved id: {}", newFilmDirectorSaved.getId());
+        log.info("Agnès Varda saved id: {}", newFilmDirectorSaved.getId());
 
-        newFilmDirectorSaved.setName("Claymore");
+        newFilmDirectorSaved.setName("Céline Sciamma");
 
         ResponseEntity<Void> exchangeUpdated = new RestTemplate()
                 .exchange("http://localhost:8080/filmDirector", HttpMethod.PUT,
                         new HttpEntity<>(newFilmDirectorSaved, createJsonHeader()), Void.class);
 
-        log.info("Major Motoko Kusanagi updated status: {}", exchangeUpdated.getStatusCode());
+        log.info("Agnès Varda updated status: {}", exchangeUpdated.getStatusCode());
 
         ResponseEntity<Void> exchangeDeleted = new RestTemplate()
                 .exchange("http://localhost:8080/filmDirector/{id}", HttpMethod.DELETE,
                         null, Void.class, newFilmDirectorSaved.getId());
 
-        log.info("Major Motoko Kusanagi deleted status: {}", exchangeUpdated.getStatusCode());
+        log.info("Agnès Varda deleted status: {}", exchangeUpdated.getStatusCode());
     }
 
     private static HttpHeaders createJsonHeader(){
