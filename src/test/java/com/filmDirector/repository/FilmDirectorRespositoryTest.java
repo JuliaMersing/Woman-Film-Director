@@ -23,7 +23,7 @@ public class FilmDirectorRespositoryTest {
     @DisplayName("Save create film director when successful")
     public void save_persist_film_director_when_successful(){
 
-        FilmDirector filmDirector = FilmDirectorCreator.createFilmDirectorCreatorToBeSaved();
+        FilmDirector filmDirector = FilmDirectorCreator.createFilmDirectorToBeSaved();
 
         FilmDirector savedFilmDirector = filmDirectorRepository.save(filmDirector);
         Assertions.assertThat(savedFilmDirector.getId()).isNotNull();
@@ -35,7 +35,7 @@ public class FilmDirectorRespositoryTest {
     @DisplayName("Save updates film director when successful")
     public void save_update_film_director_when_successful(){
 
-        FilmDirector filmDirector = FilmDirectorCreator.createFilmDirectorCreatorToBeSaved();
+        FilmDirector filmDirector = FilmDirectorCreator.createFilmDirectorToBeSaved();
 
         FilmDirector savedFilmDirector = filmDirectorRepository.save(filmDirector);
 
@@ -51,7 +51,7 @@ public class FilmDirectorRespositoryTest {
     @Test
     @DisplayName("Delete removes film director when successful")
     public void remove_deleted_film_director_when_successful() {
-        FilmDirector filmDirector = FilmDirectorCreator.createFilmDirectorCreatorToBeSaved();
+        FilmDirector filmDirector = FilmDirectorCreator.createFilmDirectorToBeSaved();
 
         FilmDirector savedFilmDirector = filmDirectorRepository.save(filmDirector);
 
