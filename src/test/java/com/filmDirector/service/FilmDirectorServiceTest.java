@@ -47,8 +47,8 @@ class FilmDirectorServiceTest {
     }
 
     @Test
-    @DisplayName("findById returns a List of film director when successful")
-    public void findById_returns_a_filmDirector_when_successful() {
+    @DisplayName("findByName returns a List of film director when successful")
+    public void findByName_returns_a_filmDirector_when_successful() {
         String expectedName = FilmDirectorCreator.createValidFilmDirector().getName();
 
         when(filmDirectorRepository.findByName(anyString())).
@@ -63,8 +63,8 @@ class FilmDirectorServiceTest {
     }
 
     @Test
-    @DisplayName("findByName returns a List of film director when successful")
-    public void findByName_returns_a_filmDirector_when_successful() {
+    @DisplayName("findById returns a List of film director when successful")
+    public void findById_returns_a_filmDirector_when_successful() {
         Integer expectedId = FilmDirectorCreator.createValidFilmDirector().getId();
 
         when(utils.findDirectorOrThrowNotFound(anyInt(), any(FilmDirectorRepository.class)))
