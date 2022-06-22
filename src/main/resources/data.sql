@@ -1,3 +1,4 @@
+CREATE DATABASE filmDirector;
 insert into filmDirector.film_director (id, biography, name) values (1,'Skipping ahead several decades, Agnés Varda´s films "Le Bonheur", "Cléo from 5 to 7" and "Vagabond" often show up on lists of essential films from female directors, and for good reason.
 Varda´s work manages to employ realism while experimenting with both form and genre. It also has strong social messages.
 Because of Varda´s background in photography, she established a distinct visual style and often uses still images in her storytelling.
