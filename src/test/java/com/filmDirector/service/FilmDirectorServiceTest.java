@@ -4,8 +4,9 @@ import com.filmDirector.domain.FilmDirector;
 import com.filmDirector.exception.ResourceNotFoundException;
 import com.filmDirector.repository.FilmDirectorRepository;
 import com.filmDirector.util.FilmDirectorCreator;
-import com.filmDirector.utils.Utils;
+import org.aspectj.lang.annotation.Before;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +26,6 @@ class FilmDirectorServiceTest {
     @InjectMocks
     private FilmDirectorService filmDirectorService;
 
-    @Mock
-    private Utils utils;
     @Mock
     private FilmDirectorRepository filmDirectorRepository;
 
@@ -66,13 +65,13 @@ class FilmDirectorServiceTest {
     public void findById_returns_a_filmDirector_when_successful() {
         Integer expectedId = FilmDirectorCreator.createValidFilmDirector().getId();
 
-        when(utils.findDirectorOrThrowNotFound(anyInt(), any(FilmDirectorRepository.class)))
+        when(filmDirectorService.getFilmDirectorById(anyInt()))
                 .thenReturn(FilmDirectorCreator.createValidFilmDirector());
 
         when(filmDirectorRepository.findById(anyInt()))
                 .thenReturn(Optional.of(FilmDirectorCreator.createValidFilmDirector()));
 
-        FilmDirector filmDirector = filmDirectorService.findById(1);
+        FilmDirector filmDirector = filmDirectorService.getFilmDirectorById(1);
 
         Assertions.assertThat(filmDirector).isNotNull();
 
@@ -113,7 +112,7 @@ class FilmDirectorServiceTest {
     @Test
     @DisplayName("delete throws ResourceNotFoundException when the filmDirector does not exist")
     public void delete_throws_ResourceNotFoundException_when_the_filmDirector_does_not_exist() {
-        when(utils.findDirectorOrThrowNotFound(anyInt(), any(FilmDirectorRepository.class)))
+        when(filmDirectorService.getFilmDirectorById(anyInt()))
                 .thenThrow(new ResourceNotFoundException("Film Director not found"));
 
         Assertions.assertThatExceptionOfType(ResourceNotFoundException.class)

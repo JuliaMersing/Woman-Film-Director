@@ -19,39 +19,36 @@ public class FilmDirectorController {
     private final FilmDirectorService filmDirectorService;
 
     @GetMapping
-    public ResponseEntity <List<FilmDirector>> listAll(){
-        return ResponseEntity.ok(filmDirectorService.listAll());
+    public List<FilmDirector> listAll(){
+        return filmDirectorService.listAll();
     }
 
-    @GetMapping(path="/{id}")
-    public ResponseEntity <FilmDirector> findById(@PathVariable int id){
-        return ResponseEntity.ok(filmDirectorService.findById(id));
+    @GetMapping("/{id}")
+    public FilmDirector findById(@PathVariable int id){
+        return filmDirectorService.getFilmDirectorById(id);
     }
 
-    @GetMapping(path="/find")
-    public ResponseEntity <List<FilmDirector>> findByName(@RequestParam (value = "name") String name){
-        return ResponseEntity.ok(filmDirectorService.findByName(name));
+    @GetMapping("/find")
+    public List<FilmDirector> findByName(@RequestParam String name){
+        return filmDirectorService.findByName(name);
     }
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<FilmDirector> save (@RequestBody @Valid FilmDirector filmDirector){
-        return ResponseEntity.ok(filmDirectorService.save(filmDirector));
+    public FilmDirector save (@RequestBody @Valid FilmDirector filmDirector){
+        return filmDirectorService.save(filmDirector);
     }
 
-    @DeleteMapping(path= "{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<FilmDirector> delete(@PathVariable int id){
         filmDirectorService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<FilmDirector> update(@RequestBody FilmDirector filmDirector){
+    @PutMapping
+    public void update(@RequestBody FilmDirector filmDirector){
         filmDirectorService.update(filmDirector);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

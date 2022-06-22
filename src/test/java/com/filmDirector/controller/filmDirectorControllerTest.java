@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -17,10 +18,9 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class filmDirectorControllerTest {
     @InjectMocks
     private FilmDirectorController filmDirectorController;
@@ -30,21 +30,16 @@ class filmDirectorControllerTest {
     @Test
     @DisplayName("list All returns a List of film directors when successful")
     public void list_All_returns_a_List_of_film_directors_when_successful(){
-        Integer expectedId = FilmDirectorCreator.createValidFilmDirector().getId();
+        List <FilmDirector> filmDirectorList = List.of(FilmDirectorCreator.createValidFilmDirector());
+        when(filmDirectorService.listAll())
+                .thenReturn(filmDirectorList);
 
-        when(filmDirectorService.save(FilmDirectorCreator.createFilmDirectorToBeSaved()))
-                .thenReturn(FilmDirectorCreator.createValidFilmDirector());
+        //Then
+        List<FilmDirector> filmDirectors = filmDirectorController.listAll();
 
-        FilmDirector filmDirectorToBeSaved = FilmDirectorCreator.createFilmDirectorToBeSaved();
-
-        FilmDirector filmDirector = filmDirectorController.save(filmDirectorToBeSaved).getBody();
-
-        Assertions.assertThat(filmDirector).isNotNull();
-
-        Assertions.assertThat(filmDirector.getId()).isNotNull();
-
-        Assertions.assertThat(filmDirector.getId()).isEqualTo(expectedId);
-
+        Assertions.assertThat(filmDirectors).isNotEmpty();
+        Assertions.assertThat(filmDirectors).isNotNull();
+        Assertions.assertThat(filmDirectors.get(0)).isEqualTo(filmDirectorList.get(0));
     }
 
     @Test
@@ -52,9 +47,10 @@ class filmDirectorControllerTest {
     public void findById_returns_a_filmDirector_when_successful() {
       Integer expectedId = FilmDirectorCreator.createValidFilmDirector().getId();
 
-      when(filmDirectorService.findById(anyInt())).thenReturn(FilmDirectorCreator.createValidFilmDirector());
+      when(filmDirectorService.getFilmDirectorById(anyInt())).
+              thenReturn(FilmDirectorCreator.createValidFilmDirector());
 
-      FilmDirector filmDirectorSaved = filmDirectorController.findById(1).getBody();
+      FilmDirector filmDirectorSaved = filmDirectorController.findById(1);
 
       Assertions.assertThat(filmDirectorSaved).isNotNull();
       Assertions.assertThat(filmDirectorSaved.getId()).isNotNull();
@@ -68,7 +64,7 @@ class filmDirectorControllerTest {
 
         when(filmDirectorService.findByName(anyString())).thenReturn(List.of(FilmDirectorCreator.createValidFilmDirector()));
 
-        List <FilmDirector> filmDirectorName = filmDirectorController.findByName("Agnès Varda").getBody();
+        List <FilmDirector> filmDirectorName = filmDirectorController.findByName("Agnès Varda");
 
         Assertions.assertThat(filmDirectorName).isNotNull();
         Assertions.assertThat(filmDirectorName).isNotEmpty();
@@ -86,7 +82,7 @@ class filmDirectorControllerTest {
 
         FilmDirector filmDirectorSaved = FilmDirectorCreator.createFilmDirectorToBeSaved();
 
-        FilmDirector filmDirector = filmDirectorController.save(filmDirectorSaved).getBody();
+        FilmDirector filmDirector = filmDirectorController.save(filmDirectorSaved);
 
         Assertions.assertThat(filmDirector).isNotNull();
         Assertions.assertThat(filmDirector.getId()).isNotNull();
@@ -105,23 +101,18 @@ class filmDirectorControllerTest {
 
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
-        Assertions.assertThat(responseEntity.getBody()).isNull();
     }
 
     @Test
     @DisplayName("update save updated an filmDirector when successful")
     public void update_save_updated_an_filmDirector_when_successful() {
+        FilmDirector updatedFilmDirector = FilmDirectorCreator.createValidFilmDirector();
 
-        when(filmDirectorService.save(FilmDirectorCreator.createValidUpdatedFilmDirector()))
-                .thenReturn(FilmDirectorCreator.createValidUpdatedFilmDirector());
+       filmDirectorController.update(updatedFilmDirector);
 
-        ResponseEntity<FilmDirector> responseEntity = filmDirectorController.update(FilmDirectorCreator.createValidFilmDirector());
+       verify(filmDirectorService, times(1)).update(updatedFilmDirector);
 
-        Assertions.assertThat(responseEntity).isNotNull();
-
-        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-
-        Assertions.assertThat(responseEntity.getBody()).isNull();
+        verify(filmDirectorService).update(updatedFilmDirector);
 
     }
 }

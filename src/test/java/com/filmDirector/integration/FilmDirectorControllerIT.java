@@ -2,8 +2,8 @@ package com.filmDirector.integration;
 
 import com.filmDirector.domain.FilmDirector;
 import com.filmDirector.repository.FilmDirectorRepository;
+import com.filmDirector.service.FilmDirectorService;
 import com.filmDirector.util.FilmDirectorCreator;
-import com.filmDirector.utils.Utils;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,12 +27,8 @@ class FilmDirectorControllerIT {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
-    @LocalServerPort
-    private int port;
     @MockBean
-    private FilmDirectorRepository filmDirectorRepository;
-    @MockBean
-    private Utils utils;
+    private FilmDirectorService filmDirectorService;
 
 
     @Test
@@ -40,7 +36,7 @@ class FilmDirectorControllerIT {
     public void listAll_returns_a_List_of_filmDirectors_when_successful() {
         String expectedName = FilmDirectorCreator.createValidFilmDirector().getName();
 
-        when(filmDirectorRepository.findAll())
+        when(filmDirectorService.listAll())
                 .thenReturn(List.of(FilmDirectorCreator.createValidFilmDirector()));
 
         List<FilmDirector> filmDirectorList = testRestTemplate.exchange("/filmDirector/", HttpMethod.GET, null, new ParameterizedTypeReference<List<FilmDirector>>() {
@@ -59,11 +55,8 @@ class FilmDirectorControllerIT {
     public void findById_return_an_filmDirector_when_successful() {
         Integer expectedId = FilmDirectorCreator.createValidFilmDirector().getId();
 
-        when(utils.findDirectorOrThrowNotFound(anyInt(), any(FilmDirectorRepository.class)))
+        when(filmDirectorService.getFilmDirectorById(anyInt()))
                 .thenReturn(FilmDirectorCreator.createValidFilmDirector());
-
-        when(filmDirectorRepository.findById(anyInt())).
-                thenReturn(Optional.of(FilmDirectorCreator.createValidFilmDirector()));
 
         FilmDirector filmDirector = testRestTemplate.getForObject("/filmDirector/1", FilmDirector.class);
 
@@ -80,13 +73,11 @@ class FilmDirectorControllerIT {
     public void findByName_returns_an_filmDirector_when_successful() {
         String expectedName = FilmDirectorCreator.createValidFilmDirector().getName();
 
-        when(filmDirectorRepository.findByName(anyString()))
+        when(filmDirectorService.findByName(anyString()))
                 .thenReturn(List.of(FilmDirectorCreator.createValidFilmDirector()));
 
         List<FilmDirector> filmDirectorList = testRestTemplate.exchange("/filmDirector/find?name='Agnès Varda'", HttpMethod.GET, null, new ParameterizedTypeReference<List<FilmDirector>>() {
         }).getBody();
-
-        Assertions.assertThat(filmDirectorList).isNotNull();
 
         Assertions.assertThat(filmDirectorList).isNotNull();
 
@@ -101,7 +92,7 @@ class FilmDirectorControllerIT {
     public void save_creates_an_filmDirector_when_successful() {
         Integer expectedId = FilmDirectorCreator.createValidFilmDirector().getId();
 
-        when(filmDirectorRepository.save(FilmDirectorCreator.createFilmDirectorToBeSaved()))
+        when(filmDirectorService.save(FilmDirectorCreator.createFilmDirectorToBeSaved()))
                 .thenReturn(FilmDirectorCreator.createValidFilmDirector());
 
         FilmDirector filmDirectorToBeSaved = FilmDirectorCreator.createFilmDirectorToBeSaved();
@@ -121,7 +112,7 @@ class FilmDirectorControllerIT {
     @DisplayName("delete removes an filmDirector when successful")
     public void delete_removes_an_filmDirector_when_successful() {
 
-        when(utils.findDirectorOrThrowNotFound(anyInt(), any(FilmDirectorRepository.class)))
+        when(filmDirectorService.getFilmDirectorById(anyInt()))
                 .thenReturn(FilmDirectorCreator.createValidFilmDirector());
 
         ResponseEntity<Void> responseEntity = testRestTemplate.exchange("/filmDirector/1",HttpMethod.DELETE, null, Void.class);
@@ -139,14 +130,14 @@ class FilmDirectorControllerIT {
 
         FilmDirector validFilmDirector = FilmDirectorCreator.createValidFilmDirector();
 
-        when(filmDirectorRepository.save(FilmDirectorCreator.createValidUpdatedFilmDirector()))
+        when(filmDirectorService.save(FilmDirectorCreator.createValidUpdatedFilmDirector()))
                 .thenReturn(FilmDirectorCreator.createValidUpdatedFilmDirector());
 
         ResponseEntity<Void> responseEntity = testRestTemplate.exchange("/filmDirector", HttpMethod.PUT, createJsonHttpEntity(validFilmDirector), Void.class);
 
         Assertions.assertThat(responseEntity).isNotNull();
 
-        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         Assertions.assertThat(responseEntity.getBody()).isNull();
 

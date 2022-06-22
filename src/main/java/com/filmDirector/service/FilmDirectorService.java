@@ -1,8 +1,8 @@
 package com.filmDirector.service;
 
 import com.filmDirector.domain.FilmDirector;
+import com.filmDirector.exception.ResourceNotFoundException;
 import com.filmDirector.repository.FilmDirectorRepository;
-import com.filmDirector.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +13,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilmDirectorService {
 
-    public final Utils utils;
     public final FilmDirectorRepository filmDirectorRepository;
 
     public List <FilmDirector> listAll(){
         return filmDirectorRepository.findAll();
     }
 
-    public FilmDirector findById(int id){
-        return utils.findDirectorOrThrowNotFound(id, filmDirectorRepository);
+    private FilmDirector findById(int id){
+        return filmDirectorRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Film director not found"));
+    }
+
+    public FilmDirector getFilmDirectorById(int id){
+        return findById(id);
     }
 
     public List <FilmDirector> findByName(String name){
         return filmDirectorRepository.findByName(name);
     }
+
     @Transactional
 
     public FilmDirector save (FilmDirector filmDirector){
@@ -34,7 +39,7 @@ public class FilmDirectorService {
     }
 
     public void delete (int id){
-        filmDirectorRepository.delete(utils.findDirectorOrThrowNotFound(id, filmDirectorRepository));
+        filmDirectorRepository.delete(findById(id));
     }
 
     public void update(FilmDirector filmDirector){
