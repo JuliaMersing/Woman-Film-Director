@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .container-page {
+        @apply min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8;
+    }
+
+    .container-form {
+        @apply max-w-md w-full space-y-8;
+    }
+
+    .flex-center {
+        @apply flex flex-row items-center justify-center lg:justify-start;
+    }
+
+    .text-normal-size {
+        @apply text-lg mb-0 mr-4;
+    }
+
+    .flex-space-between {
+        @apply flex justify-between items-center mb-6;
+    }
+
+    .text-center-left {
+        @apply text-center lg:text-left;
+    }
+
+    .text-sm-bold {
+        @apply text-sm font-semibold mt-2 pt-1 mb-0;
+    }
+
+    .input {
+        @apply form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-purple-500 focus:outline-none;
+    }
+
+    .input-error {
+        @apply form-control block w-full px-4 py-2 text-xl font-medium bg-white bg-clip-padding border border-2 border-rose-600 rounded transition ease-in-out m-0 focus:text-red-600 focus:bg-white focus:border-purple-500 focus:outline-none;
+    }
+
+    .checkbox {
+        @apply form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-purple-500 checked:border-purple-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer;
+    }
+
+    .link {
+        @apply font-medium text-purple-600 hover:text-purple-500 ml-2;
+    }
+}
+
+
