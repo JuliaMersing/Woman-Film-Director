@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should render component and match snapshot 1`] = `
+<div>
+  <div
+    class="container-page"
+  >
+    <div
+      class="container-form"
+    >
+      <form
+        data-testid="login-form"
+      >
+        <div
+          class="mb-10"
+        >
+          <div
+            class="flex justify-center"
+          >
+            <i
+              class="fa-solid fa-bell-concierge text-[56px] text-purple-600 justify-center"
+            />
+          </div>
+          <h2
+            class="mt-6 text-center text-3xl font-extrabold text-gray-900"
+          >
+            Login to your account
+          </h2>
+          <p
+            class="mt-2 text-center text-sm text-gray-600 mt-5"
+          >
+            Don't have an account?
+            <a
+              class="font-medium text-purple-600 hover:text-purple-500 ml-1"
+              href="/signUp"
+            >
+              Signup
+            </a>
+          </p>
+        </div>
+        <div
+          class="mb-6"
+        >
+          <input
+            class="input"
+            data-testid="email-input"
+            id="email"
+            placeholder="Email address"
+            type="email"
+            value=""
+          />
+        </div>
+        <div
+          class="mb-6"
+        >
+          <input
+            class="input"
+            data-testid="password-input"
+            id="password"
+            placeholder="Password"
+            type="password"
+            value=""
+          />
+        </div>
+        <div
+          class="flex-space-between"
+        >
+          <div
+            class="flex-center "
+          >
+            <input
+              checked=""
+              class="checkbox"
+              type="checkbox"
+            />
+            <p
+              class="text-gray-800 ml-1"
+            >
+              Remember me
+            </p>
+          </div>
+          <a
+            class="link"
+            href="/#"
+          >
+            Forgot password?
+          </a>
+        </div>
+        <div
+          class="text-center-left"
+        >
+          <button
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

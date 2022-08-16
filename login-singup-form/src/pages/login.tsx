@@ -61,57 +61,57 @@ const Login = () => {
   };
 
   return (
-      <div
-          className="container-page"
-      >
-        <div className="container-form">
-          <form onSubmit={onFormSubmit} data-testid="login-form">
-            <Header
-                heading="Login to your account"
-                paragraph="Don't have an account?"
-                linkName="Signup"
-                href="/signUp"
-            />
-            <Input
-                onChange={handleEmailChange}
-                onBlur={handleEmailBlur}
-                value={email}
-                className={emailError ? 'input-error' : 'input'}
-                type="email"
-                id="email"
-                placeholder="Email address"
-                dataTestId="email"
-                error={emailError}
-            />
-            <Input
-                onChange={handlePasswordChange}
-                onBlur={handlePasswordBlur}
-                value={password}
-                className={passwordError ? 'input-error' : 'input'}
-                type="password"
-                id="password"
-                placeholder="Password"
-                dataTestId="password"
-                error={passwordError}
-            />
-            <div className="flex-space-between">
-              <div className="flex-center ">
-                <Checkbox onChange={handleRememberChange} check={remember} />
-                <p className="text-gray-800 ml-1">Remember me </p>
-              </div>
-              <Link href="/#" className="link">
-                Forgot
-                password?
-              </Link>
+    <div
+      className="container-page"
+    >
+      <div className="container-form">
+        <form onSubmit={onFormSubmit} data-testid="login-form">
+          <Header
+            heading="Login to your account"
+            paragraph="Don't have an account?"
+            linkName="Signup"
+            href="/signUp"
+          />
+          <Input
+            onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
+            value={email}
+            className={emailError ? 'input-error' : 'input'}
+            type="email"
+            id="email"
+            placeholder="Email address"
+            dataTestId="email"
+            error={emailError}
+          />
+          <Input
+            onChange={handlePasswordChange}
+            onBlur={handlePasswordBlur}
+            value={password}
+            className={passwordError ? 'input-error' : 'input'}
+            type="password"
+            id="password"
+            placeholder="Password"
+            dataTestId="password"
+            error={passwordError}
+          />
+          <div className="flex-space-between">
+            <div className="flex-center ">
+              <Checkbox onChange={handleRememberChange} check={remember} />
+              <p className="text-gray-800 ml-1">Remember me </p>
             </div>
-            <div className="text-center-left">
-              <Button>
-                Login
-              </Button>
-            </div>
-          </form>
-        </div>
+            <Link href="/#" className="link">
+              Forgot
+              password?
+            </Link>
+          </div>
+          <div className="text-center-left">
+            <Button>
+              Login
+            </Button>
+          </div>
+        </form>
       </div>
+    </div>
   );
 };
 
