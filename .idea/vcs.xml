@@ -2,5 +2,12 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Forms" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Login-Signup-Form" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Spring-Boot-Film-Director" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Spring-Boot-Tv_series" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cross-travel-work" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mars-challenge" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/template" vcs="Git" />
   </component>
 </project>
