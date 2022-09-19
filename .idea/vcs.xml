@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Forms" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Login-SignUp-Forms" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Login-Signup-Form" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Spring-Boot-Film-Director" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Spring-Boot-Tv_series" vcs="Git" />
