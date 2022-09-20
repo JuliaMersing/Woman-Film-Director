@@ -1,7 +1,6 @@
 package com.filmDirector.integration;
 
 import com.filmDirector.domain.FilmDirector;
-import com.filmDirector.repository.FilmDirectorRepository;
 import com.filmDirector.service.FilmDirectorService;
 import com.filmDirector.util.FilmDirectorCreator;
 import org.assertj.core.api.Assertions;
@@ -11,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;

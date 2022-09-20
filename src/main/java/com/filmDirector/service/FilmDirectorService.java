@@ -6,7 +6,6 @@ import com.filmDirector.repository.FilmDirectorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -31,8 +30,6 @@ public class FilmDirectorService {
     public List <FilmDirector> findByName(String name){
         return filmDirectorRepository.findByName(name);
     }
-
-    @Transactional
 
     public FilmDirector save (FilmDirector filmDirector){
         return filmDirectorRepository.save(filmDirector);
